@@ -29,9 +29,11 @@ ChessPiece* Board::CreatePiece(char pieceCode, Location pieceLocation)
 		return new Rook(true,pieceLocation);
 /*	case 'Q':
 		return new Queen(true, pieceLocation);
+		*/
 	case 'K':
 		whiteKing = new King(true, pieceLocation);
 		return whiteKing;
+		/*
 	case 'p':
 		return new Pawn(false, pieceLocation);
 	case 'n':	
@@ -44,9 +46,10 @@ ChessPiece* Board::CreatePiece(char pieceCode, Location pieceLocation)
 		/*
 	case 'q':
 		return new Queen(false, pieceLocation);
+		*/
 	case 'k':
 		blackKing = new King(false, pieceLocation);
-		return blackKing;*/
+		return blackKing;
 	default:
 		return nullptr;
 	}
@@ -66,7 +69,7 @@ bool Board::IsInCheck(bool kingColor)
 	// check if any of the opponent's pieces can capture the king
 	// loop through the board
 	for (int i = 0; i < 8; i++) {
-		for (int j = 0; i < 8; i++) {
+		for (int j = 0; j < 8; j++) {
 			// if the piece is not null and is not the same color as the king
 			if (!IsEmpty(Location(i,j)) && board[i][j]->GetColor() != kingColor)
 			{
@@ -127,17 +130,18 @@ int Board::MakeMove(std::string moveCode)
 	// do the move
 	pieceToMove->MakeMove(to, *this);
 	// if your king is in check
-	/*if (IsInCheck(colorTurn))
+	if (IsInCheck(colorTurn))
 	{
 		// undo the move
 		UndoMove(moveCode);
 		return 31;
-	}*/
+	}
 	// if the opponent's king is in check
-	/*if (IsInCheck(!colorTurn))
+	if (IsInCheck(!colorTurn))
 	{
+		colorTurn = !colorTurn;
 		return 41;
-	}*/
+	}
 
 	// you made a legal move, change the turn
 	colorTurn = !colorTurn;
