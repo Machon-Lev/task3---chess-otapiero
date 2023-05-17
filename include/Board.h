@@ -43,6 +43,7 @@ private:
 	friend class ChessPiece;
 	friend class Rook;
 	friend class King;
+	friend class Bishop;
 
 	Board(const Board&) = delete;
 	Board& operator=(const Board&) = delete;
