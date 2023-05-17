@@ -42,6 +42,7 @@ private:
 	bool IsInCheck(bool isWhite);
 	friend class ChessPiece;
 	friend class Rook;
+	friend class King;
 
 	Board(const Board&) = delete;
 	Board& operator=(const Board&) = delete;

@@ -5,16 +5,7 @@ Rook::Rook(bool piece_color, Location& location) : ChessPiece(piece_color, locat
 }
 
 
-void Rook::MakeMove(Location& destinationLocation, Board& board)
-{
-	if (IsLegalMove(destinationLocation, board))
-	{
-		board.board[destinationLocation.x][destinationLocation.y] = this;
-		board.board[this->GetLocation().x][this->GetLocation().y] = nullptr;
-		
-		SetLocation(destinationLocation);
-	}
-}
+
 
 bool Rook::IsLegalMove(Location& destinationLocation, Board& board)
 {
@@ -34,7 +25,7 @@ bool Rook::IsLegalMove(Location& destinationLocation, Board& board)
 
 	int x = currentLocation.x;
 	int y = currentLocation.y;
-	// check if there are any pieces in the way
+	// check if there are any friendly pieces in the way
 	while (x != destinationLocation.x || y != destinationLocation.y)
 	{
 		if (x != destinationLocation.x)
@@ -57,9 +48,3 @@ bool Rook::IsLegalMove(Location& destinationLocation, Board& board)
 	// the move is legal
 	return true;
 }
-
-const int(*Rook::GetMoveTemplates(int index))[2]
-{
-	return MOVE_TEMPLATES;
-}
-const int Rook::MOVE_TEMPLATES[4][2] = { {1,0},{-1,0},{0,1},{0,-1} };
