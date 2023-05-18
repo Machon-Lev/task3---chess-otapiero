@@ -1,42 +1,36 @@
-#include "Rook.h"
+#include "Queen.h"
 #include "Board.h"
-Rook::Rook(bool piece_color, Location& location) : ChessPiece(piece_color, location)
+Queen::Queen(bool piece_color, Location& location) : ChessPiece(piece_color, location)
 {
 }
 
-
-
-
-bool Rook::IsLegalMove(Location& destinationLocation, Board& board)
+bool Queen::IsLegalMove(Location& destinationLocation, Board& board)
 {
-	// check if the destination location is on the same row or column and if there are any pieces in the way
-
+	// check if the destination location is in the board limits
 	if (!board.IsLegalLocation(destinationLocation))
 	{
 		return false;
 	}
 
 	Location currentLocation = this->GetLocation();
-	// if the destination location is not on the same row or column
-	if (currentLocation.x != destinationLocation.x && currentLocation.y != destinationLocation.y)
+	// if the destination location is not on the same diagonal or row or column
+	int x = currentLocation.x;
+	int y = currentLocation.y;
+	if (abs(x - destinationLocation.x) != abs(y - destinationLocation.y) && 
+		(currentLocation.x != destinationLocation.x && currentLocation.y != destinationLocation.y))
 	{
 		return false;
 	}
-
-	int x = currentLocation.x;
-	int y = currentLocation.y;
-
 	int xDirection = 0;
 	int yDirection = 0;
 	if (x != destinationLocation.x)
 	{
 		xDirection = x < destinationLocation.x ? 1 : -1;
 	}
-	else if (y != destinationLocation.y)
+	if (y != destinationLocation.y)
 	{
 		yDirection = y < destinationLocation.y ? 1 : -1;
 	}
-	
 	// check if there are any friendly pieces in the way
 	while (x != destinationLocation.x || y != destinationLocation.y)
 	{
@@ -46,7 +40,7 @@ bool Rook::IsLegalMove(Location& destinationLocation, Board& board)
 		{
 			continue;
 		}
-		if (board.board[x][y]->GetColor()==this->GetColor())
+		if (board.board[x][y]->GetColor() == this->GetColor())
 		{
 			return false;
 		}
@@ -54,3 +48,5 @@ bool Rook::IsLegalMove(Location& destinationLocation, Board& board)
 	// the move is legal
 	return true;
 }
+
+

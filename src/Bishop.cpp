@@ -22,15 +22,14 @@ bool Bishop::IsLegalMove(Location& destinationLocation, Board& board)
 	int x = currentLocation.x;
 	int y = currentLocation.y;
 
+	int xDirection = x < destinationLocation.x ? 1 : -1;
+	int yDirection = y < destinationLocation.y ? 1 : -1;
 	// check if there are any friendly pieces in the way
-	while (x != destinationLocation.x || y != destinationLocation.y)
+	while (x != destinationLocation.x && y != destinationLocation.y)
 	{
-		if (x != destinationLocation.x)
-		{
-			x += x < destinationLocation.x ? 1 : -1;
-			y += y < destinationLocation.y ? 1 : -1;
-		}
-		
+		x += xDirection;
+		y += yDirection;
+	
 		if (board.IsEmpty(Location(x, y)))
 		{
 			continue;
