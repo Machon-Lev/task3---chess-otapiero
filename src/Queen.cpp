@@ -14,36 +14,39 @@ bool Queen::IsLegalMove(Location& destinationLocation, Board& board)
 
 	Location currentLocation = this->GetLocation();
 	// if the destination location is not on the same diagonal or row or column
-	int x = currentLocation.x;
-	int y = currentLocation.y;
-	if (abs(x - destinationLocation.x) != abs(y - destinationLocation.y) && 
+	if (abs(currentLocation.x - destinationLocation.x) != abs(currentLocation.y - destinationLocation.y) &&
 		(currentLocation.x != destinationLocation.x && currentLocation.y != destinationLocation.y))
 	{
 		return false;
 	}
 	int xDirection = 0;
 	int yDirection = 0;
-	if (x != destinationLocation.x)
+	if (currentLocation.x != destinationLocation.x)
 	{
-		xDirection = x < destinationLocation.x ? 1 : -1;
+		xDirection = currentLocation.x < destinationLocation.x ? 1 : -1;
 	}
-	if (y != destinationLocation.y)
+	if (currentLocation.y != destinationLocation.y)
 	{
-		yDirection = y < destinationLocation.y ? 1 : -1;
+		yDirection = currentLocation.y < destinationLocation.y ? 1 : -1;
 	}
+	currentLocation.x += xDirection;
+	currentLocation.y += yDirection;
 	// check if there are any friendly pieces in the way
-	while (x != destinationLocation.x || y != destinationLocation.y)
+	while (currentLocation != destinationLocation)
 	{
-		x += xDirection;
-		y += yDirection;
-		if (board.IsEmpty(Location(x, y)))
-		{
-			continue;
-		}
-		if (board.board[x][y]->GetColor() == this->GetColor())
+		
+		if (!board.IsEmpty(currentLocation))
 		{
 			return false;
 		}
+		currentLocation.x += xDirection;
+		currentLocation.y += yDirection;
+	}
+	// if the destination location has a friendly piece in it return false
+	if (!board.IsEmpty(destinationLocation) &&
+		board.board[destinationLocation.x][destinationLocation.y]->GetColor() == this->GetColor())
+	{
+		return false;
 	}
 	// the move is legal
 	return true;
