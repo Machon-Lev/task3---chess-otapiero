@@ -6,4 +6,5 @@
 							  "ChessPiece.cpp" 
 							  "Queen.cpp"
 							  "Knight.cpp"
+							  "Pawn.cpp"
 							  "Bishop.cpp")

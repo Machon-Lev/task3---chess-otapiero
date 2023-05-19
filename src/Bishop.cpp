@@ -27,7 +27,7 @@ bool Bishop::IsLegalMove(Location& destinationLocation, Board& board)
 	// check if there are any friendly pieces in the way
 	while (currentLocation != destinationLocation)
 	{
-		if (board.IsEmpty(currentLocation))
+		if (!board.IsEmpty(currentLocation))
 		{
 			return false;
 		}
