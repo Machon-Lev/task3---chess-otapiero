@@ -14,6 +14,8 @@ class ChessPiece
 		bool GetColor();
 		virtual bool IsLegalMove(Location&, Board&)=0;
 		virtual void MakeMove(Location&, Board&);
+		// only for pawns for now	
+		virtual void UndoMove(){}
 		void SetLocation(Location&);
 		Location GetLocation();
 

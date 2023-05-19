@@ -1,14 +1,13 @@
 #pragma once
 #include "ChessPiece.h"
-/*
 class Pawn : public ChessPiece
 {
-private:
-	const int(*GetMoveTemplates(int index))[2] override;
+	private:
+	bool firstMove;
 public:
 	Pawn(bool, Location&);
 
 	void MakeMove(Location&, Board&)override;
+	void UndoMove()override;
 	bool IsLegalMove(Location&, Board&) override;
-
-};*/
+};

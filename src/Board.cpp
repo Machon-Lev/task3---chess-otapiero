@@ -19,9 +19,8 @@ Board::~Board()
 ChessPiece* Board::CreatePiece(char pieceCode, Location pieceLocation)
 {
     switch (pieceCode) {
-/*	case 'P':
+	case 'P':
 		return new Pawn(true,pieceLocation);
-		*/
 	case 'N':
 		return new Knight(true, pieceLocation);
 	case 'B':
@@ -34,10 +33,8 @@ ChessPiece* Board::CreatePiece(char pieceCode, Location pieceLocation)
 	case 'K':
 		whiteKing = new King(true, pieceLocation);
 		return whiteKing;
-		/*
 	case 'p':
 		return new Pawn(false, pieceLocation);
-		*/
 	case 'n':	
 		return new Knight(false, pieceLocation);
 	case 'b':
@@ -182,4 +179,5 @@ void Board::UndoMove(std::string moveCode)
 	}
 	board[from.x][from.y] = pieceToMove;
 	pieceToMove->SetLocation(from);
+	pieceToMove->UndoMove();
 }
