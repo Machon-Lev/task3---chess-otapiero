@@ -27,9 +27,9 @@ ChessPiece* Board::CreatePiece(char pieceCode, Location pieceLocation)
 		return new Bishop(true, pieceLocation);
 	case 'R':
 		return new Rook(true,pieceLocation);
-/*	case 'Q':
+	case 'Q':
 		return new Queen(true, pieceLocation);
-		*/
+		
 	case 'K':
 		whiteKing = new King(true, pieceLocation);
 		return whiteKing;
@@ -43,10 +43,8 @@ ChessPiece* Board::CreatePiece(char pieceCode, Location pieceLocation)
 		return new Bishop(false, pieceLocation);
 	case 'r':
 		return new Rook(false, pieceLocation);
-		/*
 	case 'q':
 		return new Queen(false, pieceLocation);
-		*/
 	case 'k':
 		blackKing = new King(false, pieceLocation);
 		return blackKing;

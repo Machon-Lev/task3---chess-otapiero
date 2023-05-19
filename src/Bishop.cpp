@@ -19,26 +19,26 @@ bool Bishop::IsLegalMove(Location& destinationLocation, Board& board)
 		return false;
 	}
 
-	int x = currentLocation.x;
-	int y = currentLocation.y;
+	int xDirection = currentLocation.x < destinationLocation.x ? 1 : -1;
+	int yDirection = currentLocation.y < destinationLocation.y ? 1 : -1;
 
+	currentLocation.x += xDirection;
+	currentLocation.y += yDirection;
 	// check if there are any friendly pieces in the way
-	while (x != destinationLocation.x || y != destinationLocation.y)
+	while (currentLocation != destinationLocation)
 	{
-		if (x != destinationLocation.x)
-		{
-			x += x < destinationLocation.x ? 1 : -1;
-			y += y < destinationLocation.y ? 1 : -1;
-		}
-		
-		if (board.IsEmpty(Location(x, y)))
-		{
-			continue;
-		}
-		if (board.board[x][y]->GetColor() == this->GetColor())
+		if (board.IsEmpty(currentLocation))
 		{
 			return false;
 		}
+		currentLocation.x += xDirection;
+		currentLocation.y += yDirection;
+	}
+	// if the destination location has a friendly piece in it return false
+	if (!board.IsEmpty(destinationLocation) &&
+		board.board[destinationLocation.x][destinationLocation.y]->GetColor() == this->GetColor())
+	{
+		return false;
 	}
 	// the move is legal
 	return true;

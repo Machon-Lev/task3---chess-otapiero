@@ -44,6 +44,9 @@ private:
 	friend class Rook;
 	friend class King;
 	friend class Bishop;
+	friend class Knight;
+	friend class Queen;
+	friend class Pawn;
 
 	Board(const Board&) = delete;
 	Board& operator=(const Board&) = delete;
