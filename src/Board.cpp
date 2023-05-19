@@ -21,8 +21,9 @@ ChessPiece* Board::CreatePiece(char pieceCode, Location pieceLocation)
     switch (pieceCode) {
 /*	case 'P':
 		return new Pawn(true,pieceLocation);
+		*/
 	case 'N':
-		return new Knight(true, pieceLocation);*/
+		return new Knight(true, pieceLocation);
 	case 'B':
 		return new Bishop(true, pieceLocation);
 	case 'R':
@@ -36,9 +37,9 @@ ChessPiece* Board::CreatePiece(char pieceCode, Location pieceLocation)
 		/*
 	case 'p':
 		return new Pawn(false, pieceLocation);
+		*/
 	case 'n':	
 		return new Knight(false, pieceLocation);
-		*/
 	case 'b':
 		return new Bishop(false, pieceLocation);
 	case 'r':
